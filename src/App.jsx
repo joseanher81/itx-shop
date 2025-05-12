@@ -1,4 +1,3 @@
-import './App.css';
 import ProductList from './pages/ProductList';
 import Header from './components/Header';
 
