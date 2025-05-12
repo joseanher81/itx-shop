@@ -1,10 +1,16 @@
+import styles from './ProductItem.module.css';
+
 const ProductItem = ({ product }) => {
   return (
-    <div>
-      <img src={product.imgUrl} alt={product.model} />
-      <h2>{product.brand}</h2>
-      <p>{product.model}</p>
-      <p>${product.price}</p>
+    <div className={styles.card}>
+      <img src={product.imgUrl} alt={product.model} className={styles.image} />
+
+      <div className={styles.info}>
+        <h2 className={styles.title}>
+          {product.brand} - {product.model}
+        </h2>
+        <p className={styles.price}>{product.price ? `${product.price} €` : 'Not available'}</p>
+      </div>
     </div>
   );
 };

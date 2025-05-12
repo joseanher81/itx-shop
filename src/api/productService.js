@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://itx-frontend-test.onrender.com/api'; // ITX API base URL
-const TIMEOUT = 15000; // Timeout for requests
+const TIMEOUT = 20000; // Timeout for requests
 
 // Create an axios instance with the base URL and timeout
 const api = axios.create({
