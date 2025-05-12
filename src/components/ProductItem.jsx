@@ -9,7 +9,9 @@ const ProductItem = ({ product }) => {
         <h2 className={styles.title}>
           {product.brand} - {product.model}
         </h2>
-        <p className={styles.price}>{product.price ? `${product.price} €` : 'Not available'}</p>
+        <p className={product.price ? styles.price : `${styles.price} ${styles.notAvailable}`}>
+          {product.price ? `${product.price} €` : 'Not available'}
+        </p>
       </div>
     </div>
   );

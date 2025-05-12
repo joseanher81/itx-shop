@@ -1,0 +1,41 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main typography */
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Reset links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset list defaults */
+ul {
+  list-style: none;
+}
+
+/* Main container class */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Headings  */
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5rem;
+}

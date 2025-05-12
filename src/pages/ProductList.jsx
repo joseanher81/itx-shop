@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getProducts } from '../api/productService';
 import ProductItem from '../components/ProductItem';
+import styles from './ProductList.module.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -20,11 +21,13 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>Product List</h1>
-      {products.map((product) => (
-        <ProductItem key={product.id} product={product} />
-      ))}
+      <div className={styles.productListGrid}>
+        {products.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

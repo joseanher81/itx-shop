@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  height: 100%;
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -26,8 +27,10 @@
 
 .info {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
 }
 
 .title {
@@ -36,6 +39,11 @@
 }
 
 .price {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #555;
+}
+
+.notAvailable {
+  color: rgb(191, 44, 44);
+  font-weight: bold;
 }
