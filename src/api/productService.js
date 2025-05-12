@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://itx-frontend-test.onrender.com/api'; // ITX API base URL
-const TIMEOUT = 10000; // Timeout for requests
+const TIMEOUT = 15000; // Timeout for requests
 
 // Create an axios instance with the base URL and timeout
-const axios = axios.create({
+const api = axios.create({
   baseURL: BASE_URL,
   timeout: TIMEOUT,
   headers: {
@@ -15,7 +15,7 @@ const axios = axios.create({
 // Get all products from the API
 export const getProducts = async () => {
   try {
-    const response = await axios.get('/product');
+    const response = await api.get('/product');
     console.log('Fetched products:', response.data);
     return response.data;
   } catch (error) {
