@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getProducts } from '../api/productService';
+import ProductItem from '../components/ProductItem';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,9 @@ const ProductList = () => {
   return (
     <div>
       <h1>Product List</h1>
-      {/* Product list content */}
+      {products.map((product) => (
+        <ProductItem key={product.id} product={product} />
+      ))}
     </div>
   );
 };

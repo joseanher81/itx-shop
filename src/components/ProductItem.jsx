@@ -1,10 +1,10 @@
 const ProductItem = ({ product }) => {
   return (
     <div>
-      <img src={product.imgUrl} alt={product.model} style={styles.image} />
-      <h2 style={styles.brand}>{product.brand}</h2>
-      <p style={styles.model}>{product.model}</p>
-      <p style={styles.price}>${product.price}</p>
+      <img src={product.imgUrl} alt={product.model} />
+      <h2>{product.brand}</h2>
+      <p>{product.model}</p>
+      <p>${product.price}</p>
     </div>
   );
 };
