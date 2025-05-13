@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import styles from './ProductItem.module.css';
 
 const ProductItem = ({ product }) => {
   return (
-    <div className={styles.card}>
+    <Link to={`product/${product.id}`} className={styles.card}>
       <img src={product.imgUrl} alt={product.model} className={styles.image} />
 
       <div className={styles.info}>
@@ -13,7 +14,7 @@ const ProductItem = ({ product }) => {
           {product.price ? `${product.price} €` : 'Not available'}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
