@@ -23,3 +23,15 @@ export const getProducts = async () => {
     throw error;
   }
 };
+
+// Get a single product by ID from the API
+export const getProduct = async (id) => {
+  try {
+    const response = await api.get(`/product/${id}`);
+    console.log('Fetched product:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    throw error;
+  }
+};
