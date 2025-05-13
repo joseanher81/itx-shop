@@ -1,4 +1,4 @@
-import ProductList from './pages/ProductList';
+import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
       <Header />
 
       <main>
-        <ProductList />
+        <Outlet />
       </main>
     </>
   );
