@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/api'; // ITX API base URL
+const BASE_URL = import.meta.env.VITE_API_BASE_URL; // ITX API base URL loaded from .env file
 const TIMEOUT = 20000; // Timeout for requests
 
 // Create an axios instance with the base URL and timeout
@@ -15,6 +15,7 @@ const api = axios.create({
 
 // Get all products from the API
 export const getProducts = async () => {
+  console.log('baseURL', BASE_URL);
   try {
     const response = await api.get('/product');
     console.log('Fetched products:', response.data);
