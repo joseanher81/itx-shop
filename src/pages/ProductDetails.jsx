@@ -2,8 +2,10 @@ import { Link, useParams } from 'react-router-dom';
 import { getProduct, addToCart } from '../api/productService';
 import { useState, useEffect } from 'react';
 import { useCartContext } from '../context/CartContext'; // Import the CartContext
-import { FaShoppingCart } from 'react-icons/fa';
 import styles from './ProductDetails.module.css';
+import Image from '../components/Image';
+import Description from '../components/Description';
+import Actions from '../components/Actions';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -45,7 +47,14 @@ const ProductDetails = () => {
     setIsPending(false); // Set pending to false after adding to cart
   };
 
-  console.log('isPending', isPending);
+  // Handle color change (Action)
+  const handleChangeColor = (color) => {
+    setSelectedColor(color); // Set selected color
+  };
+  // Handle storage change (Action)
+  const handleChangeStorage = (storage) => {
+    setSelectedStorage(storage); // Set selected storage
+  };
 
   return loading ? (
     <div className="loading">Loading...</div>
@@ -57,92 +66,21 @@ const ProductDetails = () => {
 
       <div className={styles.detailContainer}>
         <div className={styles.imageSection}>
-          <img src={product.imgUrl} alt={product.model} />
+          <Image product={product} />
         </div>
 
         <div className={styles.infoSection}>
-          <h1>
-            {product.brand} - {product.model}
-          </h1>
-          <p className={product.price ? styles.price : `${styles.price} ${styles.notAvailable}`}>
-            {product.price ? `${product.price} €` : 'Not available'}
-          </p>
-          <ul className={styles.specifications}>
-            <li>
-              <strong>CPU:</strong> {product.cpu ? product.cpu : 'Not available'}
-            </li>
-            <li>
-              <strong>RAM:</strong> {product.ram ? product.ram : 'Not available'}
-            </li>
-            <li>
-              <strong>OS:</strong> {product.os ? product.os : 'Not available'}
-            </li>
-            <li>
-              <strong>Screen Resolution:</strong>{' '}
-              {product.displayResolution ? product.displayResolution : 'Not available'}
-            </li>
-            <li>
-              <strong>Battery:</strong> {product.battery ? product.battery : 'Not available'}
-            </li>
-            <li>
-              <strong>Cameras:</strong>{' '}
-              {product.primaryCamera || product.secondaryCamera
-                ? `${product.primaryCamera || 'N/A'} / ${product.secondaryCmera || 'N/A'}`
-                : 'Not available'}
-            </li>
-            <li>
-              <strong>Dimensions:</strong>{' '}
-              {product.dimentions ? product.dimentions : 'Not available'}
-            </li>
-            <li>
-              <strong>Weight:</strong> {product.weight ? `${product.weight}g` : 'Not available'}
-            </li>
-          </ul>
+          <Description product={product} />
 
-          <div className={styles.actions}>
-            <label>
-              Almacenamiento:
-              <select value={selectedStorage} onChange={(e) => setSelectedStorage(e.target.value)}>
-                {product.options.storages.map((option) => (
-                  <option key={option.code} value={option.code}>
-                    {option.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Color:
-              <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
-                {product.options.colors.map((option) => (
-                  <option key={option.code} value={option.code}>
-                    {option.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-
-          <button
-            disabled={isPending}
-            className={styles.addButton}
-            onClick={() =>
-              handleAddToCart({
-                id: product.id,
-                colorCode: selectedColor,
-                storageCode: selectedStorage,
-              })
-            }
-          >
-            {isPending ? (
-              'Adding...'
-            ) : (
-              <>
-                <FaShoppingCart className={styles.icon} />
-                Add to cart
-              </>
-            )}
-          </button>
+          <Actions
+            product={product}
+            handleAddToCart={handleAddToCart}
+            selectedColor={selectedColor}
+            selectedStorage={selectedStorage}
+            handleChangeColor={handleChangeColor}
+            handleChangeStorage={handleChangeStorage}
+            isPending={isPending}
+          />
         </div>
       </div>
     </div>

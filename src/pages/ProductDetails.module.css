@@ -16,75 +16,13 @@
   gap: 2rem;
   margin-top: 1rem;
 }
+
 .imageSection {
   flex: 1 1 40%;
   text-align: center;
+  align-content: center;
 }
 
 .infoSection {
   flex: 1 1 55%;
-}
-
-.price {
-  font-size: 2rem;
-  margin: 1rem;
-  color: #1069cf;
-}
-
-.notAvailable {
-  color: rgb(191, 44, 44);
-  font-weight: bold;
-}
-
-.specifications {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
-}
-
-.specifications li {
-  margin-bottom: 0.5rem;
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.actions label {
-  display: flex;
-  flex-direction: column;
-  font-weight: 500;
-}
-
-.actions select {
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-.addButton {
-  min-width: 160px;
-  background-color: #1069cf;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.addButton:hover {
-  background-color: #005bb5;
-}
-
-.addButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.icon {
-  margin-right: 8px;
 }

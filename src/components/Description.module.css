@@ -1,0 +1,20 @@
+.price {
+  font-size: 2rem;
+  margin: 1rem;
+  color: #1069cf;
+}
+
+.notAvailable {
+  color: rgb(191, 44, 44);
+  font-weight: bold;
+}
+
+.specifications {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.specifications li {
+  margin-bottom: 0.5rem;
+}
