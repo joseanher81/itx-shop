@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
-import { getProduct } from '../api/productService';
+import { getProduct, addToCart } from '../api/productService';
 import { useState, useEffect } from 'react';
+import { useCartContext } from '../context/CartContext'; // Import the CartContext
 import styles from './ProductDetails.module.css';
 
 const ProductDetails = () => {
@@ -9,6 +10,7 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(null); // State for selected color action
   const [selectedStorage, setSelectedStorage] = useState(null); // State for selected storage action
   const [loading, setLoading] = useState(true); // State for loading status
+  const { setCount } = useCartContext(); // Get setCount function from CartContext
 
   // Fetch product details from the API
   useEffect(() => {
@@ -29,7 +31,13 @@ const ProductDetails = () => {
   }, [id]);
 
   // Add product to cart
-  const addToCart = (product) => {
+  const handleAddToCart = async (product) => {
+    try {
+      const res = await addToCart(product); // Call addToCart function from api service
+      setCount(res.count); // Dispatch new count value and update cart context
+    } catch (error) {
+      console.error('Error adding product to cart:', error); // TODO Display error on UI
+    }
     console.log('Product added to cart:', product); // TODO Implement add to cart functionality
   };
 
@@ -112,7 +120,11 @@ const ProductDetails = () => {
           <button
             className={styles.addButton}
             onClick={() =>
-              addToCart({ id: product.id, colorCode: selectedColor, storageCode: selectedStorage })
+              handleAddToCart({
+                id: product.id,
+                colorCode: selectedColor,
+                storageCode: selectedStorage,
+              })
             }
           >
             Add to cart
