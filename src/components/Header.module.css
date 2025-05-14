@@ -20,6 +20,11 @@
   text-decoration: none;
 }
 
+.breadcrumbs {
+  font-size: 0.9rem;
+  color: #555;
+}
+
 .breadcrumbLink {
   color: #1069cf;
   text-decoration: none;
@@ -27,4 +32,13 @@
 
 .breadcrumbLink:hover {
   text-decoration: underline;
+}
+
+.cart {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
