@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getProduct, addToCart } from '../api/productService';
 import { useState, useEffect } from 'react';
 import { useCartContext } from '../context/CartContext'; // Import the CartContext
+import { FaShoppingCart } from 'react-icons/fa';
 import styles from './ProductDetails.module.css';
 
 const ProductDetails = () => {
@@ -133,7 +134,14 @@ const ProductDetails = () => {
               })
             }
           >
-            {isPending ? 'Adding...' : 'Add to cart'}
+            {isPending ? (
+              'Adding...'
+            ) : (
+              <>
+                <FaShoppingCart className={styles.icon} />
+                Add to cart
+              </>
+            )}
           </button>
         </div>
       </div>

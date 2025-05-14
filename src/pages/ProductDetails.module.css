@@ -84,3 +84,7 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.icon {
+  margin-right: 8px;
+}
