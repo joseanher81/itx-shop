@@ -22,13 +22,18 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload],
-        count: state.count + 1,
+        //count: state.count + 1, // At present this is set by the API response
       };
     case 'REMOVE_FROM_CART':
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
-        count: state.count > 0 ? state.count - 1 : 0,
+        //count: state.count > 0 ? state.count - 1 : 0, // At present this is set by the API response
+      };
+    case 'SET_COUNT':
+      return {
+        ...state,
+        count: action.payload,
       };
     case 'RESET':
       return initialState;
@@ -38,10 +43,15 @@ const cartReducer = (state, action) => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState); // It is a better practice to use the length of the cart array to get the count of items in the cart (but the Test asked to use the count from the API response)
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
+  };
+
+  // It is a better practice to use the length of the cart array to get the count of items in the cart (but the Test asked to use the count from the API response)
+  const setCount = (count) => {
+    dispatch({ type: 'SET_COUNT', payload: count });
   };
 
   // Unused for now
@@ -55,7 +65,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ ...state, addToCart, setCount, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
