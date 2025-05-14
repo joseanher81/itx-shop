@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  text-decoration: none;
+}
+
+.breadcrumbLink {
+  color: #1069cf;
+  text-decoration: none;
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+}
