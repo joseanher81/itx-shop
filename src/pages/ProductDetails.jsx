@@ -11,6 +11,7 @@ const ProductDetails = () => {
   const [selectedStorage, setSelectedStorage] = useState(null); // State for selected storage action
   const [loading, setLoading] = useState(true); // State for loading status
   const { setCount } = useCartContext(); // Get setCount function from CartContext
+  const [isPending, setIsPending] = useState(false); // State for pending status
 
   // Fetch product details from the API
   useEffect(() => {
@@ -32,14 +33,18 @@ const ProductDetails = () => {
 
   // Add product to cart
   const handleAddToCart = async (product) => {
+    setIsPending(true); // Set pending to true before adding to cart
     try {
       const res = await addToCart(product); // Call addToCart function from api service
       setCount(res.count); // Dispatch new count value and update cart context
+      console.log('Product added to cart:', product); // TODO Implement add to cart functionality
     } catch (error) {
       console.error('Error adding product to cart:', error); // TODO Display error on UI
     }
-    console.log('Product added to cart:', product); // TODO Implement add to cart functionality
+    setIsPending(false); // Set pending to false after adding to cart
   };
+
+  console.log('isPending', isPending);
 
   return loading ? (
     <div className="loading">Loading...</div>
@@ -118,6 +123,7 @@ const ProductDetails = () => {
           </div>
 
           <button
+            disabled={isPending}
             className={styles.addButton}
             onClick={() =>
               handleAddToCart({
@@ -127,7 +133,7 @@ const ProductDetails = () => {
               })
             }
           >
-            Add to cart
+            {isPending ? 'Adding...' : 'Add to cart'}
           </button>
         </div>
       </div>
