@@ -36,8 +36,9 @@ const Actions = ({
         </label>
       </div>
 
+      {/* Disable button if add to cart is pending or no price */}
       <button
-        disabled={isPending}
+        disabled={isPending || !product.price}
         className={styles.addButton}
         onClick={() =>
           handleAddToCart({
