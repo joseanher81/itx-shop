@@ -4,6 +4,7 @@ import { useCache } from '../hooks/useCache'; // Import the useCache hook
 import ProductItem from '../components/ProductItem';
 import styles from './ProductList.module.css';
 import Search from '../components/Search';
+import Loading from '../components/Loading';
 
 const ProductList = () => {
   const { data: products = [], loading, error } = useCache('productsList', getProducts);
@@ -22,6 +23,8 @@ const ProductList = () => {
 
     setFilteredProducts(queryResult);
   }, [query, products]);
+
+  if (loading) return <Loading />; // Show loading spinner while fetching data
 
   return (
     <div className="container">

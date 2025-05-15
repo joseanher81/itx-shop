@@ -7,6 +7,7 @@ import styles from './ProductDetails.module.css';
 import Image from '../components/Image';
 import Description from '../components/Description';
 import Actions from '../components/Actions';
+import Loading from '../components/Loading';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -58,9 +59,9 @@ const ProductDetails = () => {
     setSelectedStorage(storage); // Set selected storage
   };
 
-  return loading ? (
-    <div className="loading">Loading...</div>
-  ) : (
+  if (loading) return <Loading />; // Show loading spinner while fetching data
+
+  return (
     <div className={styles.productDetailsContainer}>
       <Link to="/" className={styles.backLink}>
         ← Back
