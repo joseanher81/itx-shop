@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL; // ITX API base URL loaded f
 const TIMEOUT = 25000; // Timeout for requests
 
 // Create an axios instance with the base URL and timeout
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   timeout: TIMEOUT,
