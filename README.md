@@ -99,4 +99,4 @@ To avoid CORS issues in development and preview environments, a **local proxy** 
 
 **José Ángel Hernández**  
 Fullstack Developer  
-GitHub: [@joseanher81](https://github.com/yourusername)
+GitHub: [@joseanher81](https://github.com/joseanher81)
