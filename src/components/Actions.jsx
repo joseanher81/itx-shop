@@ -15,7 +15,10 @@ const Actions = ({
       <div className={styles.actions}>
         <label>
           Storage:
-          <select value={selectedStorage} onChange={(e) => handleChangeStorage(e.target.value)}>
+          <select
+            value={selectedStorage ?? ''}
+            onChange={(e) => handleChangeStorage(e.target.value)}
+          >
             {product.options.storages.map((option) => (
               <option key={option.code} value={option.code}>
                 {option.name}
@@ -26,7 +29,7 @@ const Actions = ({
 
         <label>
           Color:
-          <select value={selectedColor} onChange={(e) => handleChangeColor(e.target.value)}>
+          <select value={selectedColor ?? ''} onChange={(e) => handleChangeColor(e.target.value)}>
             {product.options.colors.map((option) => (
               <option key={option.code} value={option.code}>
                 {option.name}
