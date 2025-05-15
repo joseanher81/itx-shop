@@ -73,4 +73,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export { CartContext };
+export { CartContext, cartReducer }; //For testing purposes
