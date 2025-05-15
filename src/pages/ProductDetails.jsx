@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { getProduct, addToCart } from '../api/productService';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useCartContext } from '../context/CartContext';
 import { useCache } from '../hooks/useCache';
 import styles from './ProductDetails.module.css';
@@ -19,6 +19,12 @@ const ProductDetails = () => {
 
   // Add product to cart
   const handleAddToCart = async (product) => {
+    if (!selectedColor || !selectedStorage) {
+      // Check if color and storage are selected
+      alert('Selecciona color y almacenamiento');
+      return;
+    }
+
     setIsPending(true); // Set pending to true before adding to cart
     try {
       const res = await addToCart(product); // Call addToCart function from api service
@@ -29,6 +35,19 @@ const ProductDetails = () => {
     }
     setIsPending(false); // Set pending to false after adding to cart
   };
+
+  // Set default values for color and storage if not already set
+  useEffect(() => {
+    if (!product?.options) return;
+
+    // Only set default values if they are not already set
+    if (selectedColor === null && product.options.colors?.length > 0) {
+      setSelectedColor(product.options.colors[0].code);
+    }
+    if (selectedStorage === null && product.options.storages?.length > 0) {
+      setSelectedStorage(product.options.storages[0].code);
+    }
+  }, [product, selectedColor, selectedStorage]);
 
   // Handle color change (Action)
   const handleChangeColor = (color) => {
