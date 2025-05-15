@@ -3,11 +3,13 @@ import { getProduct, addToCart } from '../api/productService';
 import { useState, useCallback, useEffect } from 'react';
 import { useCartContext } from '../context/CartContext';
 import { useCache } from '../hooks/useCache';
+import { toast } from 'react-toastify';
 import styles from './ProductDetails.module.css';
 import Image from '../components/Image';
 import Description from '../components/Description';
 import Actions from '../components/Actions';
 import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -30,9 +32,9 @@ const ProductDetails = () => {
     try {
       const res = await addToCart(product); // Call addToCart function from api service
       setCount(res.count); // Dispatch new count value and update cart context
-      console.log('Product added to cart:', product); // TODO Implement add to cart functionality
+      toast.success('Product added to cart!'); // Show success message
     } catch (error) {
-      console.error('Error adding product to cart:', error); // TODO Display error on UI
+      toast.error('Could not add to cart. Please try again.');
     }
     setIsPending(false); // Set pending to false after adding to cart
   };
@@ -60,6 +62,7 @@ const ProductDetails = () => {
   };
 
   if (loading) return <Loading />; // Show loading spinner while fetching data
+  if (error) return <ErrorMessage message={error.message} />; // Show error message if fetching fails
 
   return (
     <div className={styles.productDetailsContainer}>

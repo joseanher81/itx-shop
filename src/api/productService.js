@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL; // ITX API base URL loaded from .env file
-const TIMEOUT = 20000; // Timeout for requests
+const TIMEOUT = 25000; // Timeout for requests
 
 // Create an axios instance with the base URL and timeout
 const api = axios.create({
@@ -15,14 +15,12 @@ const api = axios.create({
 
 // Get all products from the API
 export const getProducts = async () => {
-  console.log('baseURL', BASE_URL);
   try {
     const response = await api.get('/product');
-    console.log('Fetched products:', response.data);
     return response.data;
   } catch (error) {
-    console.error('Error fetching products:', error);
-    throw error;
+    console.error('Error fetching products list:', error);
+    throw new Error('Error fetching product list');
   }
 };
 
@@ -30,11 +28,10 @@ export const getProducts = async () => {
 export const getProduct = async (id) => {
   try {
     const response = await api.get(`/product/${id}`);
-    console.log('Fetched product:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching product:', error);
-    throw error;
+    throw new Error('Error fetching product');
   }
 };
 
@@ -51,6 +48,6 @@ export const addToCart = async ({ id, colorCode, storageCode }) => {
     return response.data;
   } catch (error) {
     console.error('Error adding product to cart:', error);
-    throw error;
+    throw new Error('Error adding product to cart');
   }
 };

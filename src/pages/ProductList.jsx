@@ -5,6 +5,7 @@ import ProductItem from '../components/ProductItem';
 import styles from './ProductList.module.css';
 import Search from '../components/Search';
 import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
 
 const ProductList = () => {
   const { data: products = [], loading, error } = useCache('productsList', getProducts);
@@ -25,6 +26,7 @@ const ProductList = () => {
   }, [query, products]);
 
   if (loading) return <Loading />; // Show loading spinner while fetching data
+  if (error) return <ErrorMessage message={error.message} />; // Show error message if fetching fails
 
   return (
     <div className="container">

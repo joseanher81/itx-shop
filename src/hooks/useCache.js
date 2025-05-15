@@ -31,7 +31,6 @@ export const useCache = (key, fetchFunc, validFor = 3600000) => {
         setData(newData);
         localStorage.setItem(key, JSON.stringify({ timestamp: now, data: newData })); // Cache the new data
       } catch (err) {
-        console.error(err);
         setError(err);
       }
 
