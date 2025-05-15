@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { getProduct, addToCart } from '../api/productService';
-import { useState, useEffect } from 'react';
-import { useCartContext } from '../context/CartContext'; // Import the CartContext
+import { useState, useCallback } from 'react';
+import { useCartContext } from '../context/CartContext';
+import { useCache } from '../hooks/useCache';
 import styles from './ProductDetails.module.css';
 import Image from '../components/Image';
 import Description from '../components/Description';
@@ -9,30 +10,12 @@ import Actions from '../components/Actions';
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({}); // State for product details
+  const fetchProduct = useCallback(() => getProduct(id), [id]); // Memoized function to avoid re-creating the function on every render
+  const { data: product = {}, loading, error } = useCache(`pd${id}`, fetchProduct); // Fetch product details from cache using id as key
   const [selectedColor, setSelectedColor] = useState(null); // State for selected color action
   const [selectedStorage, setSelectedStorage] = useState(null); // State for selected storage action
-  const [loading, setLoading] = useState(true); // State for loading status
   const { setCount } = useCartContext(); // Get setCount function from CartContext
-  const [isPending, setIsPending] = useState(false); // State for pending status
-
-  // Fetch product details from the API
-  useEffect(() => {
-    const loadProduct = async () => {
-      setLoading(true); // Set loading to true before fetching
-      try {
-        const data = await getProduct(id);
-        setProduct(data); // Set single product details from api
-        setSelectedColor(data.options.colors?.[0]?.code || ''); // Set default color
-        setSelectedStorage(data.options.storages?.[0]?.code || ''); // Set default storage
-        console.log('Product:', data);
-      } catch (error) {
-        console.error('Error fetching product:', error); // TODO Display error on UI
-      }
-      setLoading(false); // Set loading to false after fetching
-    };
-    loadProduct();
-  }, [id]);
+  const [isPending, setIsPending] = useState(false); // State for pending status on add to cart action
 
   // Add product to cart
   const handleAddToCart = async (product) => {
