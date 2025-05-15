@@ -16,7 +16,7 @@ const ProductList = () => {
 
     const queryResult = products.filter((product) => {
       if (!query) return true; // If no query, show all products
-      const fullname = `${product.brand} - ${product.model}`; // Concatenate brand and model for search
+      const fullname = `${product.brand} ${product.model}`; // Concatenate brand and model for search
       return fullname.toLowerCase().includes(query.toLowerCase());
     });
 

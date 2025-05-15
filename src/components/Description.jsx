@@ -4,7 +4,7 @@ const Description = ({ product }) => {
   return (
     <>
       <h1>
-        {product.brand} - {product.model}
+        {product.brand} {product.model}
       </h1>
       <p className={product.price ? styles.price : `${styles.price} ${styles.notAvailable}`}>
         {product.price ? `${product.price} €` : 'Not available'}

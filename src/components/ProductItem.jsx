@@ -8,7 +8,7 @@ const ProductItem = ({ product }) => {
 
       <div className={styles.info}>
         <h2 className={styles.title}>
-          {product.brand} - {product.model}
+          {product.brand} {product.model}
         </h2>
         <p className={product.price ? styles.price : `${styles.price} ${styles.notAvailable}`}>
           {product.price ? `${product.price} €` : 'Not available'}
