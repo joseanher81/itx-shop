@@ -14,7 +14,7 @@ const Actions = ({
     <>
       <div className={styles.actions}>
         <label>
-          Almacenamiento:
+          Storage:
           <select value={selectedStorage} onChange={(e) => handleChangeStorage(e.target.value)}>
             {product.options.storages.map((option) => (
               <option key={option.code} value={option.code}>
