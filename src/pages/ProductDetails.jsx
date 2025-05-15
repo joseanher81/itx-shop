@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { getProduct, addToCart } from '../api/productService';
+import { getProduct, addToCart as apiAddToCart } from '../api/productService';
 import { useState, useCallback, useEffect } from 'react';
 import { useCartContext } from '../context/CartContext';
 import { useCache } from '../hooks/useCache';
@@ -17,7 +17,7 @@ const ProductDetails = () => {
   const { data: product = {}, loading, error } = useCache(`pd${id}`, fetchProduct); // Fetch product details from cache using id as key
   const [selectedColor, setSelectedColor] = useState(null); // State for selected color action
   const [selectedStorage, setSelectedStorage] = useState(null); // State for selected storage action
-  const { setCount } = useCartContext(); // Get setCount function from CartContext
+  const { setCount, addToCart } = useCartContext(); // Get setCount function from CartContext
   const [isPending, setIsPending] = useState(false); // State for pending status on add to cart action
 
   // Add product to cart
@@ -30,8 +30,9 @@ const ProductDetails = () => {
 
     setIsPending(true); // Set pending to true before adding to cart
     try {
-      const res = await addToCart(product); // Call addToCart function from api service
+      const res = await apiAddToCart(product); // Call addToCart function from api service
       setCount(res.count); // Dispatch new count value and update cart context
+      addToCart(product); // Dispatch add product to cart context
       toast.success('Product added to cart!'); // Show success message
     } catch (error) {
       toast.error('Could not add to cart. Please try again.');
